@@ -20,7 +20,7 @@ public class Reactiontest extends JFrame {
         this.setLayout(new GridLayout(4,4));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // aaaa
+        // your mum gay
 
         // Buttons erzeugen
         for(int j = 0; j < button.length; j++){
