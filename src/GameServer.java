@@ -23,15 +23,16 @@ public class GameServer {
         public void actionPerformed(ActionEvent ae) {
 
             Random rand = new Random();
+            // Wait time von 3-6s
             int waitTime = rand.nextInt(3000)+3000;
-
+            // Anzahl der grün werdenden Buttons (1-4)
             int enaButtons = rand.nextInt(4)+1;
 
             String messageString = null;
 
 
             for(int i = 0; i < enaButtons; i++){
-
+                // Buttons die enabled werden bestimmen und an die Clients schicken
                 messageString = messageString + Integer.toString(rand.nextInt(16)) + ";";
 
             }

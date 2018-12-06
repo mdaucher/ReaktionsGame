@@ -37,11 +37,7 @@ public class Reactiontest extends JFrame {
         readyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 GameClient.sendMessage("READY");
-
-
-                play();
             }
         });
         this.setVisible(true);
