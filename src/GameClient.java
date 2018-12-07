@@ -47,7 +47,8 @@ public class GameClient {
         }
     }
 
-    public void sendMessage(String message) {
+    public static void sendMessage(String message) {
+
         connection.sendMessage(message);
     }
 
