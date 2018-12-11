@@ -24,10 +24,11 @@ public class GameServer {
 
             Random rand = new Random();
             int waitTime = rand.nextInt(3000)+3000;
+            System.out.println(waitTime);
 
             int enaButtons = rand.nextInt(4)+1;
 
-            String messageString = null;
+           String messageString = null;
 
 
             for(int i = 0; i < enaButtons; i++){
@@ -38,10 +39,10 @@ public class GameServer {
 
             // sende Nachricht an alle Clients, die dem Server derzeit bekannt sind
             for (GameConnection p : clients) {
-
+                // Abfrage ob alle Clients schon bereit sind
                 if(ae.getActionCommand() == "READY"){
                     readyCount++;
-
+                    System.out.println("READY");
                 }
 
                 if(readyCount == clients.size()){
@@ -53,6 +54,7 @@ public class GameServer {
                                 Thread.sleep(waitTime);
 
                                 p.sendMessage(finalMessageString);
+
 
                             } catch (Exception e) {
                             }
@@ -106,4 +108,8 @@ public class GameServer {
     }
 
 
+    public static void main(String[] args) {
+        GameServer gs = new GameServer(1234);
+        gs.serverStart();
+    }
 }
