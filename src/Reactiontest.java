@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 public class Reactiontest extends JFrame {
 
-    private static final int RAND_RANGE = 400;
-
     private JButton[] button = new JButton[16];
     private javax.swing.Timer myTimer;
     private JButton readyButton = new JButton("Ready");

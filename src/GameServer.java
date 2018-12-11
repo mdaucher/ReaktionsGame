@@ -42,7 +42,6 @@ public class GameServer {
 
                 if(ae.getActionCommand() == "READY"){
                     readyCount++;
-
                 }
 
                 if(readyCount == clients.size()){
@@ -64,7 +63,6 @@ public class GameServer {
 
                 // Damit die Nachricht nicht an den Sender zurückgeschickt wird
                 if(!p.equals(ae.getSource())){
-
                     p.sendMessage(ae.getActionCommand());
                 }
             }
@@ -109,7 +107,6 @@ public class GameServer {
     public static void main(String[] args) {
         GameServer gs = new GameServer(1234);
         gs.serverStart();
-
     }
 
 }
