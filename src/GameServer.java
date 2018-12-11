@@ -24,7 +24,6 @@ public class GameServer {
 
             Random rand = new Random();
             int waitTime = rand.nextInt(3000)+3000;
-            System.out.println(waitTime);
 
             int enaButtons = rand.nextInt(4)+1;
 
@@ -42,7 +41,6 @@ public class GameServer {
                 // Abfrage ob alle Clients schon bereit sind
                 if(ae.getActionCommand() == "READY"){
                     readyCount++;
-                    System.out.println("READY");
                 }
 
                 if(readyCount == clients.size()){
