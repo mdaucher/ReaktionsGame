@@ -9,7 +9,7 @@ public class GameClient {
     private int port;
     private ArrayList<ActionListener> listeners = new ArrayList<>();
     private boolean connected;
-    private GameConnection connection;
+    private static GameConnection connection;
 
     public GameClient(String host, int port){
         this.host = host;
