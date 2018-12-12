@@ -105,10 +105,5 @@ public class GameServer {
         this.running = false;
     }
 
-    public static void main(String[] args) {
-        GameServer gs = new GameServer(1234);
-        gs.serverStart();
-
-    }
 
 }

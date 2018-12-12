@@ -47,14 +47,10 @@ public class GameClient {
         }
     }
 
-    public static void sendMessage(String message) {
+    public void sendMessage(String message) {
 
         connection.sendMessage(message);
     }
 
-    public static void main(String[] args) {
-        GameClient gc = new GameClient("localhost",1234);
-        gc.start();
-    }
 
 }

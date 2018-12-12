@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 
 public class Reactiontest extends JFrame {
 
-    private static final int RAND_RANGE = 400;
-
     private JButton[] button = new JButton[16];
     private javax.swing.Timer myTimer;
     private JButton readyButton = new JButton("Ready");
@@ -14,10 +12,13 @@ public class Reactiontest extends JFrame {
 
 
     public Reactiontest() {
-        super("Reactiontest");
+        super("Reactiongame");
         this.setSize(600, 400);
         this.setLayout(new GridLayout(4, 4));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        GameClient gc = new GameClient("localhost",1234);
+        gc.start();
 
         // Buttons erzeugen
         for (int j = 0; j < button.length; j++) {
@@ -38,7 +39,7 @@ public class Reactiontest extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                GameClient.sendMessage("READY");
+                gc.sendMessage("READY");
 
 
                 play();
