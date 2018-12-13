@@ -30,6 +30,7 @@ public class Reactiontest extends JFrame {
 
         gc.start();
 
+
         // Buttons erzeugen
         for (int j = 0; j < button.length; j++) {
             button[j] = new JButton();
@@ -83,6 +84,7 @@ public class Reactiontest extends JFrame {
 
                         if (counter == 0) {
                             // an den Server die info schicken das der Player wieder ready ist
+                           // gc.sendMessage("READY");
                         }
                     }
                 });

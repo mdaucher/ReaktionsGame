@@ -33,7 +33,6 @@ public class GameServer {
             for(int i = 0; i < enaButtons; i++){
 
                 messageString = messageString + Integer.toString(rand.nextInt(16)) + ";";
-
             }
 
             // sende Nachricht an alle Clients, die dem Server derzeit bekannt sind
@@ -52,8 +51,6 @@ public class GameServer {
                                 Thread.sleep(waitTime);
 
                                 p.sendMessage(finalMessageString);
-
-
                             } catch (Exception e) {
                             }
                         }
@@ -62,10 +59,10 @@ public class GameServer {
                 }
 
                 // Damit die Nachricht nicht an den Sender zurückgeschickt wird
-                if(!p.equals(ae.getSource())){
+                //if(!p.equals(ae.getSource())){
 
-                    p.sendMessage(ae.getActionCommand());
-                }
+                   // p.sendMessage(ae.getActionCommand());
+                //}
             }
         }
     };
