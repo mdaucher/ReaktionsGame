@@ -62,15 +62,19 @@ public class Reactiontest extends JFrame {
         String[] split = finalMessageString.split(";");
         for(int i = 0; i<split.length; i++) {
 
+           int buttonNumber =  Integer.parseInt(split[i]);
+
             // Buttons enablen und gruen setzten welche geklickt werden sollen
-            while (button[Integer.parseInt(split[i])].isEnabled() == false) {
+            while (button[buttonNumber].isEnabled() == false) {
                 // Buttons enablen
-                button[Integer.parseInt(split[i])].setEnabled(true);
-                button[Integer.parseInt(split[i])].setBackground(Color.GREEN);
-                counter++;final int tmp = Integer.parseInt(split[i]);
+                button[buttonNumber].setEnabled(true);
+                button[buttonNumber].setBackground(Color.GREEN);
+                counter++;
+
+                final int tmp = buttonNumber;
 
                 // Grüne Buttons gedrückt?
-                button[Integer.parseInt(split[i])].addActionListener(new ActionListener() {
+                button[buttonNumber].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         button[tmp].setEnabled(false);
