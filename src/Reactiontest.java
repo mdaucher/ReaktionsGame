@@ -25,6 +25,9 @@ public class Reactiontest extends JFrame {
                 System.out.println(actionEvent.getActionCommand());
 
                 getMessage(actionEvent.getActionCommand());
+
+
+
             }
         });
 
