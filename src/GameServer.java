@@ -35,13 +35,14 @@ public class GameServer {
                 System.out.println("Hi");
             }
 
+            if(ae.getActionCommand().equals("READY")){
+                readyCount++;
+            }
             // sende Nachricht an alle Clients, die dem Server derzeit bekannt sind
             for (GameConnection p : clients) {
                 // Abfrage ob alle Clients schon bereit sind
 
-                if(ae.getActionCommand().equals("READY")){
-                    readyCount++;
-                }
+
 
                 if(readyCount == clients.size()){
                     String finalMessageString = messageString;
