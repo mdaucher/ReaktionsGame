@@ -25,9 +25,6 @@ public class Reactiontest extends JFrame {
                 System.out.println(actionEvent.getActionCommand());
 
                 getMessage(actionEvent.getActionCommand());
-
-
-
             }
         });
 
@@ -60,13 +57,13 @@ public class Reactiontest extends JFrame {
         this.setVisible(true);
     }
 
-    public void getMessage (String finalMessageString) {
+    public void getMessage (String finalMessageString){
 
 
         String[] split = finalMessageString.split(";");
-        for (int i = 0; i < split.length; i++) {
+        for(int i = 0; i<split.length; i++) {
 
-            int buttonNumber = Integer.parseInt(split[i]);
+           int buttonNumber =  Integer.parseInt(split[i]);
 
             // Buttons enablen und gruen setzten welche geklickt werden sollen
             while (button[buttonNumber].isEnabled() == false) {
@@ -85,9 +82,10 @@ public class Reactiontest extends JFrame {
                         button[tmp].setBackground(Color.white);
                         counter--;
 
+                        // an den Server die info schicken das der Player wieder ready ist
                         if (counter == 0) {
-                            // an den Server die info schicken das der Player wieder ready ist
-                            // gc.sendMessage("READY");
+                            //gc.sendMessage("READY");
+
                         }
                     }
                 });
