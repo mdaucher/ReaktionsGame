@@ -15,7 +15,6 @@ public class GameConnection {
 
     public GameConnection(Socket player){
         this.connection = player;
-
     }
 
     public void connectionStart(){
