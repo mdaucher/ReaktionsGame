@@ -39,10 +39,7 @@ public class GameServer {
             for (GameConnection p : clients) {
                 // Abfrage ob alle Clients schon bereit sind
 
-                /*
-                    "READY" wird zwar hier übergeben jedoch funktioniert die IF Schleifen Abfrage nicht!
-                 */
-                if(ae.getActionCommand() == "READY"){
+                if(ae.getActionCommand().equals("READY")){
                     readyCount++;
                 }
 
