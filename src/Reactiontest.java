@@ -9,7 +9,7 @@ public class Reactiontest extends JFrame {
     private javax.swing.Timer myTimer;
     private JButton readyButton = new JButton("Ready");
     private int counter = 0;
-
+    private GameClient gc;
 
     public Reactiontest() {
         super("Reactiongame");
@@ -17,7 +17,7 @@ public class Reactiontest extends JFrame {
         this.setLayout(new GridLayout(4, 4));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        GameClient gc = new GameClient("localhost",1234);
+        gc = new GameClient("localhost",1234);
 
         gc.addActionListener(new ActionListener() {
             @Override
@@ -62,41 +62,39 @@ public class Reactiontest extends JFrame {
 
     public void getMessage (String finalMessageString) {
 
+        if(finalMessageString.equals("RESTART")){
+            readyButton.setEnabled(true);
+        }else{
+            String[] split = finalMessageString.split(";");
+            for (int i = 0; i < split.length; i++) {
 
-        String[] split = finalMessageString.split(";");
-        for (int i = 0; i < split.length; i++) {
+                int buttonNumber = Integer.parseInt(split[i]);
 
-            int buttonNumber = Integer.parseInt(split[i]);
+                // Buttons enablen und gruen setzten welche geklickt werden sollen
+                while (button[buttonNumber].isEnabled() == false) {
+                    // Buttons enablen
+                    button[buttonNumber].setEnabled(true);
+                    button[buttonNumber].setBackground(Color.GREEN);
+                    counter++;
 
-            // Buttons enablen und gruen setzten welche geklickt werden sollen
-            while (button[buttonNumber].isEnabled() == false) {
-                // Buttons enablen
-                button[buttonNumber].setEnabled(true);
-                button[buttonNumber].setBackground(Color.GREEN);
-                counter++;
+                    final int tmp = buttonNumber;
 
-                final int tmp = buttonNumber;
+                    // Grüne Buttons gedrückt?
+                    button[buttonNumber].addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent actionEvent) {
+                            button[tmp].setEnabled(false);
+                            button[tmp].setBackground(Color.white);
+                            counter--;
 
-                // Grüne Buttons gedrückt?
-                button[buttonNumber].addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        button[tmp].setEnabled(false);
-                        button[tmp].setBackground(Color.white);
-                        counter--;
-
-                        if (counter == 0) {
-                            // an den Server die info schicken das der Player fertig ist
-                            gc.sendMessage("FINISHED");
-
-
+                            if (counter == 0) {
+                                // an den Server die info schicken das der Player fertig ist
+                                gc.sendMessage("FINISHED");
+                            }
                         }
-                    }
-                });
-
+                    });
+                }
             }
-
         }
     }
-
 }

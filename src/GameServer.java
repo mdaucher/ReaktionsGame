@@ -1,6 +1,5 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class GameServer {
 
     private ArrayList<GameConnection> clients = new ArrayList<>();
 
-    public GameServer(int port){
+    public GameServer(int port) {
         this.port = port;
     }
 
@@ -24,22 +23,28 @@ public class GameServer {
         public void actionPerformed(ActionEvent ae) {
 
             Random rand = new Random();
-            int waitTime = rand.nextInt(3000)+3000;
 
-            int enaButtons = rand.nextInt(4)+1;
+            // Wartezeit zwischen 3 und 6 Sekunden (Wert in Millisekunden)
+            int waitTime = rand.nextInt(3000) + 3000;
+
+            // Es zwischen 1 und 4 Buttons zum anklicken
+            int enaButtons = rand.nextInt(4) + 1;
 
             String messageString = "";
 
-            for(int i = 0; i < enaButtons; i++){
+            // Die anzuklickenden Buttons zu einem String zusammenfuegen
+            for (int i = 0; i < enaButtons; i++) {
 
                 messageString = messageString + Integer.toString(rand.nextInt(16)) + ";";
             }
 
-            if(ae.getActionCommand().equals("READY")){
+            // Ist ein Spieler bereit wird der entsprechende Counter erhoeht
+            if (ae.getActionCommand().equals("READY")) {
                 readyCount++;
             }
 
-            if(ae.getActionCommand().equals("FINISHED")){
+            // Ist ein Spieler fertig wird der entsprechende Counter erhoeht
+            if (ae.getActionCommand().equals("FINISHED")) {
                 finishCount++;
             }
 
@@ -47,10 +52,15 @@ public class GameServer {
             for (GameConnection p : clients) {
                 // Abfrage ob alle Clients schon bereit sind
 
+                if (finishCount == clients.size()) {
+                    readyCount = 0;
+                    p.sendMessage("RESTART");
+                    finishCount = 0;
+                }
 
-                if(readyCount == clients.size()){
+                if (readyCount == clients.size()) {
                     String finalMessageString = messageString;
-                    new Thread(){
+                    new Thread() {
                         @Override
                         public void run() {
                             try {
@@ -61,25 +71,19 @@ public class GameServer {
                             }
                         }
                     }.start();
-
-                    readyCount = 0;
-
                 }
-
             }
-
-
         }
     };
 
-    public void serverStart(){
+    public void serverStart() {
         this.running = true;
 
         Thread serverThread = new Thread() {
             @Override
             public void run() {
 
-                try(ServerSocket server = new ServerSocket(GameServer.this.port)) {
+                try (ServerSocket server = new ServerSocket(GameServer.this.port)) {
 
                     while (running) {
                         // Client verbindet sich auf den Server
@@ -93,10 +97,9 @@ public class GameServer {
 
                         p.connectionStart();
                         clients.add(p);
-
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
                 }
             }
         };
@@ -104,7 +107,7 @@ public class GameServer {
         serverThread.start();
     }
 
-    public void serverStop(){
+    public void serverStop() {
         this.running = false;
     }
 
@@ -112,5 +115,4 @@ public class GameServer {
         GameServer gs = new GameServer(1234);
         gs.serverStart();
     }
-
 }
