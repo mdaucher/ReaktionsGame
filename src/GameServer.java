@@ -10,6 +10,7 @@ public class GameServer {
 
     private int port;
     private int readyCount;
+    private int finishCount;
     private boolean running = false;
 
     private ArrayList<GameConnection> clients = new ArrayList<>();
@@ -32,16 +33,20 @@ public class GameServer {
             for(int i = 0; i < enaButtons; i++){
 
                 messageString = messageString + Integer.toString(rand.nextInt(16)) + ";";
-                System.out.println("Hi");
+            }
+
+            if(ae.getActionCommand().equals("READY")){
+                readyCount++;
+            }
+
+            if(ae.getActionCommand().equals("FINISHED")){
+                finishCount++;
             }
 
             // sende Nachricht an alle Clients, die dem Server derzeit bekannt sind
             for (GameConnection p : clients) {
                 // Abfrage ob alle Clients schon bereit sind
 
-                if(ae.getActionCommand().equals("READY")){
-                    readyCount++;
-                }
 
                 if(readyCount == clients.size()){
                     String finalMessageString = messageString;
@@ -56,6 +61,8 @@ public class GameServer {
                             }
                         }
                     }.start();
+
+                    readyCount = 0;
 
                 }
 

@@ -86,8 +86,8 @@ public class Reactiontest extends JFrame {
                         counter--;
 
                         if (counter == 0) {
-                            // an den Server die info schicken das der Player wieder ready ist
-                            // gc.sendMessage("READY");
+                            // an den Server die info schicken das der Player fertig ist
+                            gc.sendMessage("FINISHED");
                         }
                     }
                 });
