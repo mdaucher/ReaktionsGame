@@ -61,12 +61,15 @@ public class Reactiontest extends JFrame {
     }
 
     public void getMessage (String finalMessageString) {
-
+        // Abfragen ob der String mit RESTART funktioniert um den Button zu enablen, damit eine neue Runde gestartet werden kann
         if(finalMessageString.equals("RESTART")){
             readyButton.setEnabled(true);
-        }else{
+        }
+        // Abfragen ob der String mit Data beginnt
+        if(finalMessageString.startsWith("Data")){
+
             String[] split = finalMessageString.split(";");
-            for (int i = 0; i < split.length; i++) {
+            for (int i = 1; i < split.length; i++) {
 
                 int buttonNumber = Integer.parseInt(split[i]);
 
@@ -86,6 +89,7 @@ public class Reactiontest extends JFrame {
                             button[tmp].setEnabled(false);
                             button[tmp].setBackground(Color.white);
                             counter--;
+
 
                             if (counter == 0) {
                                 // an den Server die info schicken das der Player fertig ist
