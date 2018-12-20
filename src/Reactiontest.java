@@ -17,17 +17,13 @@ public class Reactiontest extends JFrame {
         this.setLayout(new GridLayout(4, 4));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        gc = new GameClient("localhost",1234);
+        gc = new GameClient("localhost", 1234);
 
         gc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println(actionEvent.getActionCommand());
-
                 getMessage(actionEvent.getActionCommand());
-
-
-
             }
         });
 
@@ -52,7 +48,6 @@ public class Reactiontest extends JFrame {
         readyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 gc.sendMessage("READY");
                 readyButton.setEnabled(false);
             }
@@ -60,13 +55,13 @@ public class Reactiontest extends JFrame {
         this.setVisible(true);
     }
 
-    public void getMessage (String finalMessageString) {
+    public void getMessage(String finalMessageString) {
         // Abfragen ob der String mit RESTART funktioniert um den Button zu enablen, damit eine neue Runde gestartet werden kann
-        if(finalMessageString.equals("RESTART")){
+        if (finalMessageString.equals("RESTART")) {
             readyButton.setEnabled(true);
         }
         // Abfragen ob der String mit Data beginnt
-        if(finalMessageString.startsWith("Data")){
+        if (finalMessageString.startsWith("Data")) {
 
             String[] split = finalMessageString.split(";");
             for (int i = 1; i < split.length; i++) {
@@ -89,7 +84,6 @@ public class Reactiontest extends JFrame {
                             button[tmp].setEnabled(false);
                             button[tmp].setBackground(Color.white);
                             counter--;
-
 
                             if (counter == 0) {
                                 // an den Server die info schicken das der Player fertig ist

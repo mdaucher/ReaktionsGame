@@ -34,7 +34,6 @@ public class GameServer {
 
             // Die anzuklickenden Buttons zu einem String zusammenfuegen
             for (int i = 0; i < enaButtons; i++) {
-
                 messageString = messageString + Integer.toString(rand.nextInt(16)) + ";";
             }
 
@@ -53,10 +52,9 @@ public class GameServer {
                 // Abfrage ob alle Clients schon bereit sind
 
                 if (finishCount == clients.size()) {
-                    new Thread(){
+                    new Thread() {
                         @Override
                         public void run() {
-                            readyCount = 0;
                             p.sendMessage("RESTART");
                             finishCount = 0;
                         }
@@ -72,6 +70,7 @@ public class GameServer {
                                 Thread.sleep(waitTime);
 
                                 p.sendMessage(finalMessageString);
+                                readyCount = 0;
                             } catch (Exception e) {
                             }
                         }
